@@ -202,9 +202,7 @@
             <li class="nav-item"><a href="#" class="nav-link">Profilo Utente</a></li>
         </ul>
     </header>
-    </br></br>
     <tiles:insertAttribute name="content"></tiles:insertAttribute>
-    </br></br>
     <tiles:insertAttribute name="footer"></tiles:insertAttribute>
 </div>
 

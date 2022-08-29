@@ -1,9 +1,9 @@
 package com.example.rentcarspring.controller;
 
 import com.example.rentcarspring.dao.AutoDAO;
+import com.example.rentcarspring.dto.PrenotazioneDTO;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
-import com.example.rentcarspring.entity.Utente;
 import com.example.rentcarspring.service.PrenotazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +17,14 @@ import java.util.List;
 
 public class PrenotazioneController {
 
-    @Autowired
-    private PrenotazioneService prenotazioneService;
+    private final PrenotazioneService prenotazioneService;
 
     @Autowired
     private AutoDAO autoDAO;
+
+    public PrenotazioneController(PrenotazioneService prenotazioneService) {
+        this.prenotazioneService = prenotazioneService;
+    }
 
     @GetMapping("/listAuto")
     public String listAuto(Model model) {
@@ -58,8 +61,8 @@ public class PrenotazioneController {
     }
 
     @PostMapping("/savePrenotazione")
-    public String savePrenotazione(@ModelAttribute("prenotazione") Prenotazione prenotazione) {
-        prenotazioneService.updatePrenotazione(prenotazione);
+    public String savePrenotazione(@ModelAttribute("prenotazione") PrenotazioneDTO prenotazioneDTO) {
+        prenotazioneService.updatePrenotazione(prenotazioneDTO);
         return "redirect:/prenotazioni/list";
     }
 }

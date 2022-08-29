@@ -1,7 +1,9 @@
 package com.example.rentcarspring.service;
 
 import com.example.rentcarspring.dao.UtenteDAO;
+import com.example.rentcarspring.dto.UtenteDTO;
 import com.example.rentcarspring.entity.Utente;
+import com.example.rentcarspring.mapper.UtenteMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,8 @@ public class UtenteServiceImpl implements UtenteService {
     UtenteDAO utenteDAO;
 
     @Override
-    public void updateUtente(Utente utente) {
-        utenteDAO.updateUtente(utente);
+    public void updateUtente(UtenteDTO utente) {
+        utenteDAO.updateUtente(UtenteMapper.fromDTOtoEntity(utente));
     }
 
     @Override

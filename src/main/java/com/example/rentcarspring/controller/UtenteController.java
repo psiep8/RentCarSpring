@@ -1,10 +1,10 @@
 package com.example.rentcarspring.controller;
 
+import com.example.rentcarspring.dto.UtenteDTO;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.entity.Utente;
 import com.example.rentcarspring.service.PrenotazioneService;
 import com.example.rentcarspring.service.UtenteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +15,18 @@ import java.util.List;
 @RequestMapping("/utenti")
 public class UtenteController {
 
-    @Autowired
-    private UtenteService utenteService;
+
+    private final UtenteService utenteService;
+    private Prenotazione prenotazione = new Prenotazione();
+    private PrenotazioneService prenotazioneService;
+
+    public UtenteController(UtenteService utenteService) {
+        this.utenteService = utenteService;
+    }
 
 
     @GetMapping("/listPrenotazioni")
-    public String listPrenotazioni(@RequestParam("utenteId") int id, Model model) {
+    public String listPrenotazioni(@RequestParam int id, Model model) {
         Utente utente = utenteService.getUser(id);
         List<Prenotazione> prenotazioneList = utente.getItems();
         model.addAttribute("prenotazioni", prenotazioneList);
@@ -42,26 +48,27 @@ public class UtenteController {
     }
 
     @GetMapping("/updateForm")
-    public String updateForm(@RequestParam("utenteId") int id, Model model) {
+    public String updateForm(@RequestParam int id, Model model) {
         Utente utente = utenteService.getUser(id);
         model.addAttribute("utente", utente);
-        return "utente-form";
+        return "edit-form";
     }
 
-    @PostMapping(value = "/deleteUtente")
-    public String deleteUtente(@RequestParam("utenteId") int id) {
+    @GetMapping(value = "/deleteUtente")
+    public String deleteUtente(@RequestParam int id) {
         utenteService.deleteUtente(id);
         return "redirect:/utenti/";
     }
 
     @PostMapping("/saveUtente")
-    public String saveUtente(@ModelAttribute("utente") Utente utente) {
-        utenteService.updateUtente(utente);
+    public String saveUtente(@ModelAttribute("utente") UtenteDTO utenteDTO) {
+        utenteService.updateUtente(utenteDTO);
         return "redirect:/utenti/";
     }
 
 
-    /*public String approvata(@RequestParam("approvata") boolean approvata) {
+    /*public String approvata(@RequestParam boolean approvata, @RequestParam int id) {
+        prenotazione = prenotazioneService.getPrenotazione(id);
 
     }*/
 

@@ -3,7 +3,6 @@ package com.example.rentcarspring.controller;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.service.AutoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,12 @@ import java.util.List;
 @RequestMapping("/auto")
 
 public class AutoController {
-    @Autowired
-    AutoService autoService;
+
+    private final AutoService autoService;
+
+    public AutoController(AutoService autoService) {
+        this.autoService = autoService;
+    }
 
     @GetMapping("/listPrenotazioni")
     public String listPrenotazioni(@RequestParam("autoId") int id, Model model) {

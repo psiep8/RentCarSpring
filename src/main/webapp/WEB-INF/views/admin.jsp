@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <body>
@@ -8,6 +8,19 @@
     </h1>
     <div align="center">
         <table border="1" cellpadding="5">
+
+            <tr>
+                Campo per il filtraggio:
+                <select name="parametri">
+                    <option value="Nome">Nome
+                    <option value="Cognome">Cognome
+                    <option value="Email">Email
+                </select>
+                Testo da cercare:<input type="text" name="text">
+                <input type="submit" name="Cerca">
+                <br/><br/>
+
+            </tr>
 
 
             <tr>
@@ -30,8 +43,17 @@
                 <th><c:out value="${user.telefono}"/></th>
                 <th><c:out value="${user.dataNascita}"/></th>
                 <th>
-                    <a href="@{/showForm/{id}(id=${user.id}">Modifica</a>
-                    <a href="@{/deleteUtente/{id}(id=${user.id}">Elimina</a>
+                    <c:url var="toUpdateUtente" value="updateForm">
+                        <c:param name="id" value="${user.id}"/></c:url>
+                    <a href="${toUpdateUtente}">Modifica</a>
+                    <c:url var="toDeleteUtente" value="deleteUtente">
+                        <c:param name="id" value="${user.id}"/></c:url>
+                    <a href="${toDeleteUtente}">Elimina</a>
+                    <c:url var="toViewPrenotazioni" value="listPrenotazioni">
+                        <c:param name="id" value="${user.id}"/>
+                    </c:url>
+                    <a href="${toViewPrenotazioni}">Visualizza prenotazioni</a>
+
                 </th>
             </tr>
             </c:forEach>

@@ -20,4 +20,12 @@
         <put-attribute name="titolo" value="Form Utente"/>
         <put-attribute name="content" value="/WEB-INF/views/utente-form.jsp"/>
     </definition>
+    <definition name="edit-form" extends="baseLayout">
+        <put-attribute name="titolo" value="Form Utente"/>
+        <put-attribute name="content" value="/WEB-INF/views/edit-form.jsp"/>
+    </definition>
+    <definition name="view-prenotazioni" extends="baseLayout">
+        <put-attribute name="titolo" value="Prenotazioni effettuate"/>
+        <put-attribute name="content" value="/WEB-INF/views/list-prenotazioni.jsp"/>
+    </definition>
 </tiles-definitions>
