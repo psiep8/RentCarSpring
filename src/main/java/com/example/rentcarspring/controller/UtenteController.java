@@ -27,7 +27,7 @@ public class UtenteController {
         return "list-prenotazioni";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public String listUtenti(Model model) {
         List<Utente> utenteList = utenteService.getUtenti();
         model.addAttribute("utenti", utenteList);
@@ -48,17 +48,18 @@ public class UtenteController {
         return "utente-form";
     }
 
-    @PostMapping("/deleteUtente")
+    @PostMapping(value = "/deleteUtente")
     public String deleteUtente(@RequestParam("utenteId") int id) {
         utenteService.deleteUtente(id);
-        return "redirect:/utenti/list";
+        return "redirect:/utenti/";
     }
 
     @PostMapping("/saveUtente")
     public String saveUtente(@ModelAttribute("utente") Utente utente) {
         utenteService.updateUtente(utente);
-        return "redirect:/utenti/list";
+        return "redirect:/utenti/";
     }
+
 
     /*public String approvata(@RequestParam("approvata") boolean approvata) {
 

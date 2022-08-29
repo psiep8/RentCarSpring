@@ -12,4 +12,12 @@
         <put-attribute name="titolo" value="RentCar"/>
         <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
     </definition>
+    <definition name="admin" extends="baseLayout">
+        <put-attribute name="titolo" value="Admin"/>
+        <put-attribute name="content" value="/WEB-INF/views/admin.jsp"/>
+    </definition>
+    <definition name="utente-form" extends="baseLayout">
+        <put-attribute name="titolo" value="Form Utente"/>
+        <put-attribute name="content" value="/WEB-INF/views/utente-form.jsp"/>
+    </definition>
 </tiles-definitions>
