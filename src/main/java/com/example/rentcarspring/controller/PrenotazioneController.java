@@ -1,15 +1,19 @@
 package com.example.rentcarspring.controller;
 
 import com.example.rentcarspring.dao.AutoDAO;
+import com.example.rentcarspring.dao.PrenotazioneDAO;
 import com.example.rentcarspring.dto.PrenotazioneDTO;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
+import com.example.rentcarspring.service.AutoService;
 import com.example.rentcarspring.service.PrenotazioneService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -19,25 +23,25 @@ public class PrenotazioneController {
 
     private final PrenotazioneService prenotazioneService;
 
-    @Autowired
-    private AutoDAO autoDAO;
+    private final AutoService autoService;
 
-    public PrenotazioneController(PrenotazioneService prenotazioneService) {
+    public PrenotazioneController(PrenotazioneService prenotazioneService, AutoService autoService) {
         this.prenotazioneService = prenotazioneService;
+        this.autoService = autoService;
     }
 
     @GetMapping("/listAuto")
     public String listAuto(Model model) {
-        List<Auto> autoList = autoDAO.getAuto();
+        List<Auto> autoList = autoService.getAuto();
         model.addAttribute("auto", autoList);
         return "list-auto";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public String listPrenotazioni(Model model) {
         List<Prenotazione> prenotazioneList = prenotazioneService.getPrenotazioni();
         model.addAttribute("prenotazioni", prenotazioneList);
-        return "home";
+        return "user";
     }
 
     @GetMapping("/showForm")
@@ -48,21 +52,26 @@ public class PrenotazioneController {
     }
 
     @GetMapping("/updateForm")
-    public String updateForm(@RequestParam("prenotazioneId") int id, Model model) {
+    public String updateForm(@RequestParam int id, Model model) {
         Prenotazione prenotazione = prenotazioneService.getPrenotazione(id);
         model.addAttribute("prenotazione", prenotazione);
-        return "prenotazione-form";
+        return "edit-prenotazione-form";
     }
 
-    @PostMapping("/deletePrenotazione")
-    public String deletePrenotazione(@RequestParam("prenotazioneId") int id) {
-        prenotazioneService.deletePrenotazione(id);
-        return "redirect:/prenotazioni/list";
+    @GetMapping("/deletePrenotazione")
+    public String deletePrenotazione(@RequestParam int id) throws IOException {
+        LocalDate dataInizio = prenotazioneService.getPrenotazione(id).getDataInizio();
+        if (dataInizio.until(LocalDate.now(), ChronoUnit.DAYS) > 2) {
+            prenotazioneService.deletePrenotazione(id);
+        } else {
+            throw new IOException("Errore, non è possibile cancellare entro due giorni dalla prenotazione");
+        }
+        return "redirect:/prenotazioni/";
     }
 
     @PostMapping("/savePrenotazione")
     public String savePrenotazione(@ModelAttribute("prenotazione") PrenotazioneDTO prenotazioneDTO) {
         prenotazioneService.updatePrenotazione(prenotazioneDTO);
-        return "redirect:/prenotazioni/list";
+        return "redirect:/prenotazioni/";
     }
 }

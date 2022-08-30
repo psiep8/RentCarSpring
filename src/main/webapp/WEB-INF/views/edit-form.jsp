@@ -49,13 +49,6 @@
                 </td>
             </tr>
             <tr>
-                <th>Customer:</th>
-                <td>
-                    <form:input id="customer" path="customer" type="text"/>
-
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2" align="center">
                     <form:button cssClass="btn btn-primary">Modifica</form:button>
                 </td>

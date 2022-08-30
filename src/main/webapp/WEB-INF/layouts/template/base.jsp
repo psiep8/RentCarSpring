@@ -197,9 +197,12 @@
         </a>
 
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Parco Auto</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Profilo Utente</a></li>
+            <li class="nav-item">
+                <a href="<c:url value="base.jsp"/>" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item">
+                <a href=""<c:url value="list-auto.jsp"/>"" class="nav-link">Parco Auto</a></li>
+            <li class="nav-item">
+                <a href=""<c:url value="UtenteServlet"/>"" class="nav-link">Profilo Utente</a></li>
         </ul>
     </header>
     <tiles:insertAttribute name="content"></tiles:insertAttribute>

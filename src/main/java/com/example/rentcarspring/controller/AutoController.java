@@ -28,7 +28,7 @@ public class AutoController {
         return "list-prenotazioni-auto";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/")
     public String listAuto(Model model) {
         List<Auto> autoList = autoService.getAuto();
         model.addAttribute("autos", autoList);
@@ -52,13 +52,13 @@ public class AutoController {
     @PostMapping("/deleteAuto")
     public String deleteAuto(@RequestParam("autoId") int id) {
         autoService.deleteAuto(id);
-        return "redirect:/auto/list";
+        return "redirect:/auto/";
     }
 
     @PostMapping("/saveAuto")
     public String saveAuto(@ModelAttribute("auto") Auto auto) {
         autoService.updateAuto(auto);
-        return "redirect:/auto/list";
+        return "redirect:/auto/";
     }
 
 }

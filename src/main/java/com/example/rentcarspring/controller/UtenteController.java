@@ -17,11 +17,11 @@ public class UtenteController {
 
 
     private final UtenteService utenteService;
-    private Prenotazione prenotazione = new Prenotazione();
-    private PrenotazioneService prenotazioneService;
+    private final PrenotazioneService prenotazioneService;
 
-    public UtenteController(UtenteService utenteService) {
+    public UtenteController(UtenteService utenteService, PrenotazioneService prenotazioneService) {
         this.utenteService = utenteService;
+        this.prenotazioneService = prenotazioneService;
     }
 
 

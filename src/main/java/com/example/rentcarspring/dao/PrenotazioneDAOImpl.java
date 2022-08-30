@@ -33,6 +33,7 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
             if (prenotazione != null) {
                 session.delete(prenotazione);
             }
+
             session.delete(prenotazione);
             transaction.commit();
         } catch (Exception e) {
