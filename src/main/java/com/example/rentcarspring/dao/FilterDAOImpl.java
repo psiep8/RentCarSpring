@@ -5,12 +5,13 @@ import com.example.rentcarspring.util.HibernateUtil;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
-
+@Repository
 public class FilterDAOImpl implements FilterDAO {
     @Override
     public List<String> getColumn(String campo, String filter) {

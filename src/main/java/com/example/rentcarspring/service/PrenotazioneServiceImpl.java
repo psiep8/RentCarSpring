@@ -20,6 +20,11 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     }
 
     @Override
+    public void updatePrenotazione(Prenotazione prenotazione) {
+        prenotazioneDAO.updatePrenotazione(prenotazione);
+    }
+
+    @Override
     public void deletePrenotazione(int id) {
         prenotazioneDAO.deletePrenotazione(id);
     }

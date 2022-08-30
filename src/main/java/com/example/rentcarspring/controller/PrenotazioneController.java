@@ -1,11 +1,10 @@
 package com.example.rentcarspring.controller;
 
-import com.example.rentcarspring.dao.AutoDAO;
-import com.example.rentcarspring.dao.PrenotazioneDAO;
 import com.example.rentcarspring.dto.PrenotazioneDTO;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.service.AutoService;
+import com.example.rentcarspring.service.FilterDateService;
 import com.example.rentcarspring.service.PrenotazioneService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +21,12 @@ import java.util.List;
 public class PrenotazioneController {
 
     private final PrenotazioneService prenotazioneService;
-
+    private final FilterDateService filterDateService;
     private final AutoService autoService;
 
-    public PrenotazioneController(PrenotazioneService prenotazioneService, AutoService autoService) {
+    public PrenotazioneController(PrenotazioneService prenotazioneService, FilterDateService filterDateService, AutoService autoService) {
         this.prenotazioneService = prenotazioneService;
+        this.filterDateService = filterDateService;
         this.autoService = autoService;
     }
 
@@ -42,6 +42,14 @@ public class PrenotazioneController {
         List<Prenotazione> prenotazioneList = prenotazioneService.getPrenotazioni();
         model.addAttribute("prenotazioni", prenotazioneList);
         return "user";
+    }
+
+    @PostMapping(value = "/selectDate")
+    public String getDataRange(@RequestParam("inizio") String inizio, @RequestParam("fine") String fine, Model model) {
+        List<Auto> list = filterDateService.getDataRange(LocalDate.parse(inizio), LocalDate.parse(fine));
+        model.addAttribute("listFiltered", list);
+        return "filtered-date";
+
     }
 
     @GetMapping("/showForm")

@@ -43,14 +43,14 @@ public class AutoController {
     }
 
     @GetMapping("/updateForm")
-    public String updateForm(@RequestParam("autoId") int id, Model model) {
+    public String updateForm(@RequestParam int id, Model model) {
         Auto auto = autoService.getAuto(id);
         model.addAttribute("auto", auto);
-        return "auto-form";
+        return "edit-auto";
     }
 
     @PostMapping("/deleteAuto")
-    public String deleteAuto(@RequestParam("autoId") int id) {
+    public String deleteAuto(@RequestParam int id) {
         autoService.deleteAuto(id);
         return "redirect:/auto/";
     }

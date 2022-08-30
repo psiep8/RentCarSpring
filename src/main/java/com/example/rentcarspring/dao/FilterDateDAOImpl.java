@@ -6,6 +6,7 @@ import com.example.rentcarspring.util.HibernateUtil;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class FilterDateDAOImpl implements FilterDateDAO {
     @Override
     public List<Auto> getDataRange(LocalDate inizio, LocalDate fine) {

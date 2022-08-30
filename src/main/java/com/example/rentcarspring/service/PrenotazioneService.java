@@ -8,6 +8,9 @@ import java.util.List;
 public interface PrenotazioneService {
     void updatePrenotazione(PrenotazioneDTO prenotazioneDTO);
 
+    void updatePrenotazione(Prenotazione prenotazione);
+
+
     void deletePrenotazione(int id);
 
     List<Prenotazione> getPrenotazioni();

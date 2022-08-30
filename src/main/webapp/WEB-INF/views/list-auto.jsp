@@ -22,15 +22,15 @@
                 <th><c:out value="${temp.marca}"/></th>
                 <th><c:out value="${temp.cilindrata}"/></th>
                 <th><c:out value="${temp.modello}"/></th>
-                <c:url var="toUpdateAuto" value="updateForm">
+                <th><c:url var="toUpdateAuto" value="updateForm">
                     <c:param name="id" value="${temp.id}"/></c:url>
-                <a href="${toUpdateAuto}">Modifica</a>
-                <c:url var="toDeleteAuto" value="deleteAuto">
-                    <c:param name="id" value="${temp.id}"/></c:url>
-                <a href="${toDeleteAuto}">Elimina</a>
-                <c:url var="toListPrenotazione" value="listPrenotazioni">
-                    <c:param name="id" value="${temp.id}"/></c:url>
-                <a href="${toListPrenotazione}">Elimina</a>
+                    <a href="${toUpdateAuto}">Modifica</a>
+                    <c:url var="toDeleteAuto" value="deleteAuto">
+                        <c:param name="id" value="${temp.id}"/></c:url>
+                    <a href="${toDeleteAuto}">Elimina</a>
+                    <c:url var="toListPrenotazione" value="listPrenotazioni">
+                        <c:param name="id" value="${temp.id}"/></c:url>
+                    <a href="${toListPrenotazione}">Visualizza Prenotazioni</a></th>
             </tr>
             </c:forEach>
         </table>

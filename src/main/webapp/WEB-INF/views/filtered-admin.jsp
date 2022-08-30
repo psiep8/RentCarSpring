@@ -1,28 +1,27 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<body>
 <div align="center">
     <a href="showForm">Nuovo utente</a>
-    <h1 align="center">Lista utenti:
+    <h1 align="center">Lista utenti filtrati:
     </h1>
     <div align="center">
-        <form:form action="filter" method="POST">
-            <tr>
-                Campo per il filtraggio:
-                <form:select path="parametri">
-                    <form:option value="Nome">Nome</form:option>
-                    <form:option value="Cognome">Cognome</form:option>
-                    <form:option value="Email">Email</form:option>
-                </form:select>
-                Testo da cercare:<form:input type="text" path="text"/>
-                <form:button cssClass="btn btn-primary">Cerca</form:button>
-                <br/><br/>
-
-            </tr>
-        </form:form>
         <table border="1" cellpadding="5">
+            <form:form action="filter" method="POST">
+                <tr>
+                    Campo per il filtraggio:
+                    <form:select path="parametri">
+                        <form:option value="Nome">Nome</form:option>
+                        <form:option value="Cognome">Cognome</form:option>
+                        <form:option value="Email">Email</form:option>
+                    </form:select>
+                    Testo da cercare:<form:input type="text" path="text"/>
+                    <form:button cssClass="btn btn-primary">Cerca</form:button>
+                    <br/><br/>
+
+                </tr>
+            </form:form>
 
             <tr>
                 <th>ID</th>
@@ -35,7 +34,7 @@
             </tr>
 
             <tr>
-                <c:forEach var="user" items="${utenti}">
+                <c:forEach var="user" items="${column}">
 
                 <th><c:out value="${user.id}"/></th>
                 <th><c:out value="${user.nome}"/></th>
@@ -61,6 +60,5 @@
         </table>
     </div>
 
-</div>
-</body>
 
+</div>

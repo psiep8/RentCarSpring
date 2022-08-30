@@ -8,15 +8,15 @@
     <a href="showForm">Nuova prenotazione</a>
     <h1 align="center">Lista prenotazioni:
     </h1>
-    <div align="center">
-        <tr>
-            Data da cercare:<input path="inizio"/>
-            Data da cercare:<input path="fine"/>
-            <input type="submit" name="Cerca">
-            <br/><br/>
-
-        </tr>
-    </div>
+    <form method="POST" action="selectDate">
+        <div align="center">
+            <tr>
+                Data di inizio da cercare:<input name="inizio" type="date"/>
+                Data di fine da cercare:<input name="fine" type="date"/>
+                <input type="submit" class="btn btn-primary">Cerca</input>
+            </tr>
+        </div>
+    </form>
 
     <table border="1" cellpadding="5">
         <tr>

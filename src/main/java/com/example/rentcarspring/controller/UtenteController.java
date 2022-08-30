@@ -3,6 +3,7 @@ package com.example.rentcarspring.controller;
 import com.example.rentcarspring.dto.UtenteDTO;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.entity.Utente;
+import com.example.rentcarspring.service.FilterService;
 import com.example.rentcarspring.service.PrenotazioneService;
 import com.example.rentcarspring.service.UtenteService;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,13 @@ public class UtenteController {
 
     private final UtenteService utenteService;
     private final PrenotazioneService prenotazioneService;
+    private final FilterService filterService;
 
-    public UtenteController(UtenteService utenteService, PrenotazioneService prenotazioneService) {
+
+    public UtenteController(UtenteService utenteService, PrenotazioneService prenotazioneService, FilterService filterService) {
         this.utenteService = utenteService;
         this.prenotazioneService = prenotazioneService;
+        this.filterService = filterService;
     }
 
 
@@ -31,6 +35,13 @@ public class UtenteController {
         List<Prenotazione> prenotazioneList = utente.getItems();
         model.addAttribute("prenotazioni", prenotazioneList);
         return "list-prenotazioni";
+    }
+
+    @PostMapping("/filter")
+    public String filterName(@RequestParam("parametri") String campo, @RequestParam("text") String filter, Model model) {
+        List<String> list = filterService.getColumn(campo, filter);
+        model.addAttribute("column", list);
+        return "filtered-admin";
     }
 
     @GetMapping("/")
@@ -66,11 +77,21 @@ public class UtenteController {
         return "redirect:/utenti/";
     }
 
+    @GetMapping("/approvata")
+    public String approvata(@RequestParam("approved") String approvata, @RequestParam int id) {
+        Prenotazione prenotazione = prenotazioneService.getPrenotazione(id);
 
-    /*public String approvata(@RequestParam boolean approvata, @RequestParam int id) {
-        prenotazione = prenotazioneService.getPrenotazione(id);
+        if (approvata.equals("Si")) {
+            prenotazione.setApprovata(true);
+            prenotazioneService.updatePrenotazione(prenotazione);
+            return "redirect:/utenti/";
+        } else {
+            prenotazione.setApprovata(false);
+            prenotazioneService.updatePrenotazione(prenotazione);
+            return "redirect:/utenti/";
+        }
 
-    }*/
+    }
 
 
 }
