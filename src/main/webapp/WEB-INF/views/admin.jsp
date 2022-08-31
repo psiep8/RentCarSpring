@@ -8,20 +8,20 @@
     <h1 align="center">Lista utenti:
     </h1>
     <div align="center">
-        <form:form action="filter" method="POST">
+        <form action="filter" method="POST">
             <tr>
                 Campo per il filtraggio:
-                <form:select path="parametri">
-                    <form:option value="Nome">Nome</form:option>
-                    <form:option value="Cognome">Cognome</form:option>
-                    <form:option value="Email">Email</form:option>
-                </form:select>
-                Testo da cercare:<form:input type="text" path="text"/>
-                <form:button cssClass="btn btn-primary">Cerca</form:button>
+                <select name="parametri">
+                    <option value="Nome">Nome</option>
+                    <option value="Cognome">Cognome</option>
+                    <option value="Email">Email</option>
+                </select>
+                Testo da cercare:<input type="text" name="text"/>
+                <button Class="btn btn-primary">Cerca</button>
                 <br/><br/>
 
             </tr>
-        </form:form>
+        </form>
         <table border="1" cellpadding="5">
 
             <tr>

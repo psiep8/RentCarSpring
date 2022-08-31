@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <td colspan="2" align="center">
-                <form:button cssClass="btn btn-primary">Aggiungi</form:button>
+                <form:button cssClass="btn btn-primary">Mostra auto disponibili</form:button>
             </td>
         </tr>
     </table>

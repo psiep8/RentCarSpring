@@ -21,7 +21,7 @@ public class AutoController {
     }
 
     @GetMapping("/listPrenotazioni")
-    public String listPrenotazioni(@RequestParam("autoId") int id, Model model) {
+    public String listPrenotazioni(@RequestParam int id, Model model) {
         Auto auto = autoService.getAuto(id);
         List<Prenotazione> prenotazioneList = auto.getItems();
         model.addAttribute("prenotazioni", prenotazioneList);

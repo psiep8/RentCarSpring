@@ -34,7 +34,7 @@ public class PrenotazioneController {
     public String listAuto(Model model) {
         List<Auto> autoList = autoService.getAuto();
         model.addAttribute("auto", autoList);
-        return "list-auto";
+        return "list-auto-prenotabili";
     }
 
     @GetMapping("/")
@@ -49,7 +49,6 @@ public class PrenotazioneController {
         List<Auto> list = filterDateService.getDataRange(LocalDate.parse(inizio), LocalDate.parse(fine));
         model.addAttribute("listFiltered", list);
         return "filtered-date";
-
     }
 
     @GetMapping("/showForm")

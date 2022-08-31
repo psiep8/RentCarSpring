@@ -28,6 +28,10 @@
         <put-attribute name="titolo" value="Prenotazioni effettuate"/>
         <put-attribute name="content" value="/WEB-INF/views/list-prenotazioni.jsp"/>
     </definition>
+    <definition name="list-prenotazioni-auto" extends="baseLayout">
+        <put-attribute name="titolo" value="Lista auto"/>
+        <put-attribute name="content" value="/WEB-INF/views/list-prenotazioni-auto.jsp"/>
+    </definition>
     <definition name="user" extends="baseLayout">
         <put-attribute name="titolo" value="User Homepage"/>
         <put-attribute name="content" value="/WEB-INF/views/user.jsp"/>
@@ -40,4 +44,29 @@
         <put-attribute name="titolo" value="Form Prenotazione"/>
         <put-attribute name="content" value="/WEB-INF/views/edit-prenotazione-form.jsp"/>
     </definition>
+    <definition name="auto-form" extends="baseLayout">
+        <put-attribute name="titolo" value="Form Auto"/>
+        <put-attribute name="content" value="/WEB-INF/views/auto-form.jsp"/>
+    </definition>
+    <definition name="edit-auto" extends="baseLayout">
+        <put-attribute name="titolo" value="Form Auto"/>
+        <put-attribute name="content" value="/WEB-INF/views/edit-auto.jsp"/>
+    </definition>
+    <definition name="filtered-admin" extends="baseLayout">
+        <put-attribute name="titolo" value="Lista utenti filtrati"/>
+        <put-attribute name="content" value="/WEB-INF/views/filtered-admin.jsp"/>
+    </definition>
+    <definition name="filtered-date" extends="baseLayout">
+        <put-attribute name="titolo" value="Auto disponibili per la prenotazione"/>
+        <put-attribute name="content" value="/WEB-INF/views/filtered-date.jsp"/>
+    </definition>
+    <definition name="list-auto" extends="baseLayout">
+        <put-attribute name="titolo" value="Parco Auto"/>
+        <put-attribute name="content" value="/WEB-INF/views/list-auto.jsp"/>
+    </definition>
+    <definition name="list-auto-prenotabili" extends="baseLayout">
+        <put-attribute name="titolo" value="Parco Auto Prenotabili"/>
+        <put-attribute name="content" value="/WEB-INF/views/list-auto-prenotabili.jsp"/>
+    </definition>
+
 </tiles-definitions>

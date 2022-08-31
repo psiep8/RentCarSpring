@@ -5,7 +5,6 @@
 <body>
 
 <div align="center">
-    <a href="showForm">Nuova prenotazione</a>
     <h1 align="center">Lista prenotazioni:
     </h1>
     <form method="POST" action="selectDate">
@@ -13,7 +12,7 @@
             <tr>
                 Data di inizio da cercare:<input name="inizio" type="date"/>
                 Data di fine da cercare:<input name="fine" type="date"/>
-                <input type="submit" class="btn btn-primary">Cerca</input>
+                <input type="submit" class="btn btn-primary"/>
             </tr>
         </div>
     </form>

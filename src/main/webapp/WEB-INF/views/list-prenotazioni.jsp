@@ -27,16 +27,14 @@
                 <c:out value="${pren.auto.modello}"/></th>
             <th>
 
-                <form:form action="approvata" method="POST">
-                    <input type="hidden" value="/approvata" name="action">
-                    <input type="hidden" name="idP" value="${pren.id}">
-                    <input type="hidden" value="/list" name="action">
-                    <form:select path="approved">
-                        <form:option value="Si">Si</form:option>f
-                        <form:option value="No">No</form:option>
-                    </form:select>
+                <form action="approvata" method="POST">
+                    <input type="hidden" name="id" value="${pren.id}">
+                    <select name="approved">
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
+                    </select>
                     <input type="submit" value="vai">
-                </form:form>
+                </form>
             </th>
 
 

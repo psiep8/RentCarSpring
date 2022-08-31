@@ -77,7 +77,7 @@ public class UtenteController {
         return "redirect:/utenti/";
     }
 
-    @GetMapping("/approvata")
+    @PostMapping("/approvata")
     public String approvata(@RequestParam("approved") String approvata, @RequestParam int id) {
         Prenotazione prenotazione = prenotazioneService.getPrenotazione(id);
 

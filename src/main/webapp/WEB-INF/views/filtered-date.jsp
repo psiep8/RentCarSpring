@@ -3,7 +3,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div align="center">
-    <form:form action="PrenotazioneServlet" method="GET">
+
+    <form:form action="listAuto" method="GET">
         <h1 align="center"><b>Lista auto disponibili alla prenotazione:</b></h1>
         </br></br>
         <table border="1" cellpadding="5">
@@ -18,9 +19,14 @@
                 <th><c:out value="${auto.marca}"/></th>
                 <th><c:out value="${auto.cilindrata}"/></th>
                 <th><c:out value="${auto.modello}"/></th>
-                <td colspan="2" align="center">
-                    <form:button cssClass="btn btn-primary">Modifica</form:button>
-                </td>
+                <form:form method="POST" modelAttribute="prenotazione" action="savePrenotazione">
+                    <form:hidden value="${inizio}" path="dataInizio"/>
+                    <form:hidden value="${fine}" path="dataFine"/>
+                    <form:input path="${auto.id}"/>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Prenota" Class="btn btn-primary"/>
+                    </td>
+                </form:form>
             </tr>
             </c:forEach>
 
