@@ -68,5 +68,4 @@
         <put-attribute name="titolo" value="Parco Auto Prenotabili"/>
         <put-attribute name="content" value="/WEB-INF/views/list-auto-prenotabili.jsp"/>
     </definition>
-
 </tiles-definitions>

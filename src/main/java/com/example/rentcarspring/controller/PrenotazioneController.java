@@ -44,12 +44,6 @@ public class PrenotazioneController {
         return "user";
     }
 
-    @PostMapping(value = "/selectDate")
-    public String getDataRange(@RequestParam("inizio") String inizio, @RequestParam("fine") String fine, Model model) {
-        List<Auto> list = filterDateService.getDataRange(LocalDate.parse(inizio), LocalDate.parse(fine));
-        model.addAttribute("listFiltered", list);
-        return "filtered-date";
-    }
 
     @GetMapping("/showForm")
     public String showForm(Model model) {
@@ -74,6 +68,17 @@ public class PrenotazioneController {
             throw new IOException("Errore, non è possibile cancellare entro due giorni dalla prenotazione");
         }
         return "redirect:/prenotazioni/";
+    }
+
+    @PostMapping(value = "/selectDate")
+    public String getDataRange(@RequestParam("inizio") String inizio, @RequestParam("fine") String fine, Model model) {
+        model.addAttribute("inizio", inizio);
+        model.addAttribute("fine", fine);
+        List<Auto> list = filterDateService.getDataRange(LocalDate.parse(inizio), LocalDate.parse(fine));
+        model.addAttribute("listFiltered", list);
+        PrenotazioneDTO newPrenotazioneDTO = new PrenotazioneDTO();
+        model.addAttribute("prenotazione", newPrenotazioneDTO);
+        return "filtered-date";
     }
 
     @PostMapping("/savePrenotazione")
