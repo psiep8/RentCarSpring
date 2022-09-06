@@ -13,5 +13,6 @@ public interface UtenteDAO {
 
     Utente getUser(int id);
 
-    Utente getUser(String nome);
+    Utente getUserByEmail(String email);
+
 }

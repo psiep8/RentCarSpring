@@ -208,7 +208,6 @@
     <tiles:insertAttribute name="content"></tiles:insertAttribute>
     <tiles:insertAttribute name="footer"></tiles:insertAttribute>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>

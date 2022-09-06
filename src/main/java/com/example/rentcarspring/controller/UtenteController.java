@@ -32,7 +32,7 @@ public class UtenteController {
     @GetMapping("/listPrenotazioni")
     public String listPrenotazioni(@RequestParam int id, Model model) {
         Utente utente = utenteService.getUser(id);
-        List<Prenotazione> prenotazioneList = utente.getItems();
+        List<Prenotazione> prenotazioneList = utente.getPrenotazioniFromUtenteItems();
         model.addAttribute("prenotazioni", prenotazioneList);
         return "list-prenotazioni";
     }
@@ -40,8 +40,8 @@ public class UtenteController {
     @PostMapping("/filter")
     public String filterName(@RequestParam("parametri") String campo, @RequestParam("text") String filter, Model model) {
         List<String> list = filterService.getColumn(campo, filter);
-        model.addAttribute("column", list);
-        return "filtered-admin";
+        model.addAttribute("utenti", list);
+        return "admin";
     }
 
     @GetMapping("/")
@@ -80,18 +80,9 @@ public class UtenteController {
     @PostMapping("/approvata")
     public String approvata(@RequestParam("approved") String approvata, @RequestParam int id) {
         Prenotazione prenotazione = prenotazioneService.getPrenotazione(id);
-
-        if (approvata.equals("Si")) {
-            prenotazione.setApprovata(true);
-            prenotazioneService.updatePrenotazione(prenotazione);
-            return "redirect:/utenti/";
-        } else {
-            prenotazione.setApprovata(false);
-            prenotazioneService.updatePrenotazione(prenotazione);
-            return "redirect:/utenti/";
-        }
-
+        prenotazione.setApprovata(approvata.equals("Si"));
+        prenotazioneService.updatePrenotazione(prenotazione);
+        return "redirect:/utenti/";
     }
-
 
 }

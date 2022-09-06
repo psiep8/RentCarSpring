@@ -1,10 +1,11 @@
 package com.example.rentcarspring.entity;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "utente")
+@Table(name = "utente", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Utente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,12 +18,14 @@ public class Utente {
     @Column(name = "cognome")
     private String cognome;
 
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "telefono")
     private String telefono;
-
 
     @Column(name = "dataNascita")
     private LocalDate dataNascita;
@@ -31,36 +34,38 @@ public class Utente {
     private boolean customer;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "utente", cascade = CascadeType.ALL)
-    private List<Prenotazione> items;
+    private List<Prenotazione> prenotazioniFromUtenteItems;
 
     public Utente() {
     }
 
-    public Utente(int id, String nome, String cognome, String email, String telefono, LocalDate dataNascita, boolean customer) {
+    public Utente(int id, String nome, String cognome, String password, String email, String telefono, LocalDate dataNascita, boolean customer) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
+        this.password = password;
         this.email = email;
         this.telefono = telefono;
         this.dataNascita = dataNascita;
         this.customer = customer;
     }
 
-    public Utente(String nome, String cognome, String email, String telefono, LocalDate dataNascita, boolean customer) {
+    public Utente(String nome, String cognome, String password, String email, String telefono, LocalDate dataNascita, boolean customer) {
         this.nome = nome;
         this.cognome = cognome;
+        this.password = password;
         this.email = email;
         this.telefono = telefono;
         this.dataNascita = dataNascita;
         this.customer = customer;
     }
 
-    public List<Prenotazione> getItems() {
-        return items;
+    public List<Prenotazione> getPrenotazioniFromUtenteItems() {
+        return prenotazioniFromUtenteItems;
     }
 
-    public void setItems(List<Prenotazione> items) {
-        this.items = items;
+    public void setPrenotazioniFromUtenteItems(List<Prenotazione> items) {
+        this.prenotazioniFromUtenteItems = items;
     }
 
     public int getId() {
@@ -85,6 +90,14 @@ public class Utente {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -121,6 +134,6 @@ public class Utente {
 
     @Override
     public String toString() {
-        return "Utente{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", email='" + email + '\'' + ", telefono='" + telefono + '\'' + ", dataNascita=" + dataNascita + ", customer=" + customer + '}';
+        return "Utente{" + "id=" + id + ", nome='" + nome + '\'' + ", cognome='" + cognome + '\'' + ", password='" + password + '\'' + ", email='" + email + '\'' + ", telefono='" + telefono + '\'' + ", dataNascita=" + dataNascita + ", customer=" + customer + '}';
     }
 }

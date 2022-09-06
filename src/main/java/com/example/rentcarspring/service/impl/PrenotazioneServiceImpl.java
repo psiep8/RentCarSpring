@@ -1,9 +1,10 @@
-package com.example.rentcarspring.service;
+package com.example.rentcarspring.service.impl;
 
 import com.example.rentcarspring.dao.PrenotazioneDAO;
 import com.example.rentcarspring.dto.PrenotazioneDTO;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.mapper.PrenotazioneMapper;
+import com.example.rentcarspring.service.PrenotazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

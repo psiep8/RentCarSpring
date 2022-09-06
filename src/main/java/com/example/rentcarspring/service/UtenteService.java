@@ -2,6 +2,7 @@ package com.example.rentcarspring.service;
 
 import com.example.rentcarspring.dto.UtenteDTO;
 import com.example.rentcarspring.entity.Utente;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
@@ -14,5 +15,6 @@ public interface UtenteService {
 
     Utente getUser(int id);
 
-    Utente getUser(String nome);
+    Utente getUserByEmail(String email);
+
 }

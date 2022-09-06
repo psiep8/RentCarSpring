@@ -1,6 +1,7 @@
-package com.example.rentcarspring.service;
+package com.example.rentcarspring.service.impl;
 
 import com.example.rentcarspring.dao.FilterDAO;
+import com.example.rentcarspring.service.FilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -9,7 +9,7 @@ public interface AutoDAO {
 
     void deleteAuto(int id);
 
-    List<Auto> getAuto();
+    List<Auto> getAllAuto();
 
     Auto getAuto(int id);
 }

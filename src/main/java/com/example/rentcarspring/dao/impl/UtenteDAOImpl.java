@@ -1,11 +1,16 @@
-package com.example.rentcarspring.dao;
+package com.example.rentcarspring.dao.impl;
 
+import com.example.rentcarspring.dao.UtenteDAO;
 import com.example.rentcarspring.entity.Utente;
 import com.example.rentcarspring.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -71,19 +76,18 @@ public class UtenteDAOImpl implements UtenteDAO {
     }
 
     @Override
-    public Utente getUser(String nome) {
-        Transaction transaction = null;
-        Utente user = null;
+    public Utente getUserByEmail(String email) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            user = session.get(Utente.class, nome);
-            transaction.commit();
+            CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+            CriteriaQuery<Utente> criteriaQuery = criteriaBuilder.createQuery(Utente.class);
+            Root<Utente> root = criteriaQuery.from(Utente.class);
+            criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("email"), email));
+            Query<Utente> query = session.createQuery(criteriaQuery);
+            return query.getSingleResult();
         } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
+
 }

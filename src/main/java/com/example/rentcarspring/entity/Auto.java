@@ -22,7 +22,7 @@ public class Auto {
     private String modello;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "utente", cascade = CascadeType.ALL)
-    private List<Prenotazione> items;
+    private List<Prenotazione> prenotazioniFromAutoItems;
 
     public Auto() {
     }
@@ -41,12 +41,12 @@ public class Auto {
         this.modello = modello;
     }
 
-    public List<Prenotazione> getItems() {
-        return items;
+    public List<Prenotazione> getPrenotazioniFromAutoItems() {
+        return prenotazioniFromAutoItems;
     }
 
-    public void setItems(List<Prenotazione> items) {
-        this.items = items;
+    public void setPrenotazioniFromAutoItems(List<Prenotazione> items) {
+        this.prenotazioniFromAutoItems = items;
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
-package com.example.rentcarspring.dao;
+package com.example.rentcarspring.dao.impl;
 
+import com.example.rentcarspring.dao.FilterDAO;
 import com.example.rentcarspring.entity.Utente;
 import com.example.rentcarspring.util.HibernateUtil;
 
@@ -21,7 +22,7 @@ public class FilterDAOImpl implements FilterDAO {
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<Utente> criteriaQuery = criteriaBuilder.createQuery(Utente.class);
             Root<Utente> root = criteriaQuery.from(Utente.class);
-            Predicate filtername = criteriaBuilder.like(root.get(filter), "%" + campo + "%");
+            Predicate filtername = criteriaBuilder.like(root.get(campo.toLowerCase()), "%" + filter + "%");
             Predicate customer = criteriaBuilder.equal(root.get("customer"), true);
             Predicate andN = criteriaBuilder.and(filtername, customer);
             criteriaQuery.select(root).where(andN);

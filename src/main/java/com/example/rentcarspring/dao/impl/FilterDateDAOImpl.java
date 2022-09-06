@@ -1,5 +1,6 @@
-package com.example.rentcarspring.dao;
+package com.example.rentcarspring.dao.impl;
 
+import com.example.rentcarspring.dao.FilterDateDAO;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.util.HibernateUtil;

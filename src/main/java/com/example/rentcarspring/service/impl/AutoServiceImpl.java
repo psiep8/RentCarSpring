@@ -1,7 +1,8 @@
-package com.example.rentcarspring.service;
+package com.example.rentcarspring.service.impl;
 
 import com.example.rentcarspring.dao.AutoDAO;
 import com.example.rentcarspring.entity.Auto;
+import com.example.rentcarspring.service.AutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class AutoServiceImpl implements AutoService {
 
     @Override
     public List<Auto> getAuto() {
-        return autoDAO.getAuto();
+        return autoDAO.getAllAuto();
     }
 
     @Override

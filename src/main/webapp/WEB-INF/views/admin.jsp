@@ -36,7 +36,6 @@
 
             <tr>
                 <c:forEach var="user" items="${utenti}">
-
                 <th><c:out value="${user.id}"/></th>
                 <th><c:out value="${user.nome}"/></th>
                 <th><c:out value="${user.cognome}"/></th>

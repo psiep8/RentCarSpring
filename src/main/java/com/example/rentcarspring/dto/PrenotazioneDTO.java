@@ -1,16 +1,10 @@
 package com.example.rentcarspring.dto;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDate;
-
 public class PrenotazioneDTO {
     private int id;
 
-    private int id_utente;
-    private int id_auto;
+    private int idUtente;
+    private int idAuto;
     private String dataInizio;
 
     private String dataFine;
@@ -21,20 +15,20 @@ public class PrenotazioneDTO {
         return id;
     }
 
-    public int getId_utente() {
-        return id_utente;
+    public int getIdUtente() {
+        return idUtente;
     }
 
-    public void setId_utente(int id_utente) {
-        this.id_utente = id_utente;
+    public void setIdUtente(int idUtente) {
+        this.idUtente = idUtente;
     }
 
-    public int getId_auto() {
-        return id_auto;
+    public int getIdAuto() {
+        return idAuto;
     }
 
-    public void setId_auto(int id_auto) {
-        this.id_auto = id_auto;
+    public void setIdAuto(int idAuto) {
+        this.idAuto = idAuto;
     }
 
     public void setId(int id) {

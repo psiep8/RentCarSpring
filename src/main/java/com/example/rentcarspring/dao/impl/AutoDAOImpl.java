@@ -1,5 +1,6 @@
-package com.example.rentcarspring.dao;
+package com.example.rentcarspring.dao.impl;
 
+import com.example.rentcarspring.dao.AutoDAO;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.util.HibernateUtil;
 import org.hibernate.Session;
@@ -42,7 +43,7 @@ public class AutoDAOImpl implements AutoDAO {
     }
 
     @Override
-    public List<Auto> getAuto() {
+    public List<Auto> getAllAuto() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Auto", Auto.class).list();
         } catch (Exception e) {

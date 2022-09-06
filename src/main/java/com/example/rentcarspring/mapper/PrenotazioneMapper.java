@@ -10,7 +10,6 @@ import java.time.LocalDate;
 public class PrenotazioneMapper {
 
     public static Prenotazione fromDTOtoEntity(PrenotazioneDTO prenotazioneDTO) {
-
         return new Prenotazione(LocalDate.parse(prenotazioneDTO.getDataInizio()), LocalDate.parse(prenotazioneDTO.getDataFine()), prenotazioneDTO.isApprovata());
     }
 

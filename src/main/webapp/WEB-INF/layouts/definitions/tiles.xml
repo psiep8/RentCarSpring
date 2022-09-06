@@ -68,4 +68,14 @@
         <put-attribute name="titolo" value="Parco Auto Prenotabili"/>
         <put-attribute name="content" value="/WEB-INF/views/list-auto-prenotabili.jsp"/>
     </definition>
+
+    <definition name="baseLogin" template="/WEB-INF/layouts/template/baseLogin.jsp">
+        <put-attribute name="titolo" value=""/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layouts/template/footer.jsp"/>
+    </definition>
+    <definition name="login" extends="baseLogin">
+        <put-attribute name="titolo" value="Pagina di Login"/>
+        <put-attribute name="content" value="/WEB-INF/views/login.jsp"/>
+    </definition>
 </tiles-definitions>
