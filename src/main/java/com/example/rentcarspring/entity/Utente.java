@@ -39,7 +39,7 @@ public class Utente {
     public Utente() {
     }
 
-    public Utente(int id, String nome, String cognome, String password, String email, String telefono, LocalDate dataNascita, boolean customer) {
+    public Utente(int id, String nome, String cognome, String password, String email, String telefono, LocalDate dataNascita, boolean customer, List<Prenotazione> prenotazioniFromUtenteItems) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
@@ -48,9 +48,10 @@ public class Utente {
         this.telefono = telefono;
         this.dataNascita = dataNascita;
         this.customer = customer;
+        this.prenotazioniFromUtenteItems = prenotazioniFromUtenteItems;
     }
 
-    public Utente(String nome, String cognome, String password, String email, String telefono, LocalDate dataNascita, boolean customer) {
+    public Utente(String nome, String cognome, String password, String email, String telefono, LocalDate dataNascita, boolean customer, List<Prenotazione> prenotazioniFromUtenteItems) {
         this.nome = nome;
         this.cognome = cognome;
         this.password = password;
@@ -58,6 +59,7 @@ public class Utente {
         this.telefono = telefono;
         this.dataNascita = dataNascita;
         this.customer = customer;
+        this.prenotazioniFromUtenteItems = prenotazioniFromUtenteItems;
     }
 
     public List<Prenotazione> getPrenotazioniFromUtenteItems() {

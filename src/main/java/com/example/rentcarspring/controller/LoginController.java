@@ -7,12 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/login/form")
-public class IndexController {
+public class LoginController {
     @GetMapping
     public String getIndex(Model model) {
         model.addAttribute("intestazione", "Benvenuti nel sito RentCar - Noleggio Auto");
         return "login";
     }
 
-
+   /* @GetMapping("/")
+    public String utenti() {
+        return "user";
+    }*/
 }

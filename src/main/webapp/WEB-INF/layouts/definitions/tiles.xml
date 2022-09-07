@@ -8,7 +8,7 @@
         <put-attribute name="content" value=""/>
         <put-attribute name="footer" value="/WEB-INF/layouts/template/footer.jsp"/>
     </definition>
-    <definition name="index" extends="baseLayout">
+    <definition name="welcome" extends="baseLayout">
         <put-attribute name="titolo" value="RentCar"/>
         <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
     </definition>

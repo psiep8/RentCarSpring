@@ -21,24 +21,26 @@ public class Auto {
     @Column(name = "modello")
     private String modello;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utente", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "auto", cascade = CascadeType.ALL)
     private List<Prenotazione> prenotazioniFromAutoItems;
 
     public Auto() {
     }
 
-    public Auto(String marca, int cilindrata, String modello) {
+    public Auto(String marca, int cilindrata, String modello, List<Prenotazione> prenotazioniFromAutoItems) {
 
         this.marca = marca;
         this.cilindrata = cilindrata;
         this.modello = modello;
+        this.prenotazioniFromAutoItems = prenotazioniFromAutoItems;
     }
 
-    public Auto(int id, String marca, int cilindrata, String modello) {
+    public Auto(int id, String marca, int cilindrata, String modello, List<Prenotazione> prenotazioniFromAutoItems) {
         this.id = id;
         this.marca = marca;
         this.cilindrata = cilindrata;
         this.modello = modello;
+        this.prenotazioniFromAutoItems = prenotazioniFromAutoItems;
     }
 
     public List<Prenotazione> getPrenotazioniFromAutoItems() {

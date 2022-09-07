@@ -1,4 +1,5 @@
 package com.example.rentcarspring.entity;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -30,17 +31,21 @@ public class Prenotazione {
     public Prenotazione() {
     }
 
-    public Prenotazione(LocalDate dataInizio, LocalDate dataFine, boolean approvata) {
+    public Prenotazione(LocalDate dataInizio, LocalDate dataFine, boolean approvata, Utente utente, Auto auto) {
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.approvata = approvata;
+        this.utente = utente;
+        this.auto = auto;
     }
 
-    public Prenotazione(int id, LocalDate dataInizio, LocalDate dataFine, boolean approvata) {
+    public Prenotazione(int id, LocalDate dataInizio, LocalDate dataFine, boolean approvata, Utente utente, Auto auto) {
         this.id = id;
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
         this.approvata = approvata;
+        this.utente = utente;
+        this.auto = auto;
     }
 
     public Auto getAuto() {
