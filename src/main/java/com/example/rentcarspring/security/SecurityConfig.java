@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.*;
@@ -20,6 +22,10 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.Filter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("customUserDetailsService")
     private UserDetailsService customUserDetailsService;
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -92,17 +99,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         filter.setAuthenticationManager(authenticationManagerBean());
         filter.setAuthenticationFailureHandler(failureHandler());
-        filter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+        filter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler());
 
         return filter;
     }
 
     @Bean
-    public SavedRequestAwareAuthenticationSuccessHandler authenticationSuccessHandler() {
-        SavedRequestAwareAuthenticationSuccessHandler auth = new SavedRequestAwareAuthenticationSuccessHandler();
-        auth.setTargetUrlParameter("targetUrl");
-        return auth;
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return new SuccessHandler();
     }
+
 
     @Bean
     public SimpleUrlAuthenticationFailureHandler failureHandler() {

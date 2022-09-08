@@ -199,10 +199,7 @@
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a href="" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item">
-                <a href="auto/" class="nav-link">Parco Auto</a></li>
-            <li class="nav-item">
-                <a href=""<c:url value="#"/>"" class="nav-link">Profilo Utente</a></li>
+
         </ul>
     </header>
     <tiles:insertAttribute name="content"></tiles:insertAttribute>

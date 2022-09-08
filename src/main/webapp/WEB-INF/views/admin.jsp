@@ -8,7 +8,7 @@
     <h1 align="center">Lista utenti:
     </h1>
     <div align="center">
-        <form action="filter" method="POST">
+        <form:form action="filter" method="POST">
             <tr>
                 Campo per il filtraggio:
                 <select name="parametri">
@@ -21,7 +21,7 @@
                 <br/><br/>
 
             </tr>
-        </form>
+        </form:form>
         <table border="1" cellpadding="5">
 
             <tr>

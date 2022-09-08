@@ -196,8 +196,30 @@
             <span class="fs-4">RentCar</span>
         </a>
 
-        <li class="nav-item">
-            <a href="" class="nav-link active" aria-current="page">Home</a></li>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="/" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="<spring:url value="/auto/" /> ">
+                    <span class="oi oi-box" title="box" aria-hidden="true"></span>
+                    Parco Auto </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<spring:url value="/prenotazioni/" /> ">
+                    <span class="oi oi-box" title="box" aria-hidden="true"></span>
+                    Prenotazioni </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<spring:url value="/utenti/" /> ">
+                    <span class="oi oi-box" title="box" aria-hidden="true"></span>
+                    Gestione Customer </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="<spring:url value="/login/form?logout" /> ">
+                    <span class="oi oi-box" title="box" aria-hidden="true"></span>
+                    Logout </a>
+            </li>
+        </ul>
     </header>
     <tiles:insertAttribute name="content"></tiles:insertAttribute>
     <tiles:insertAttribute name="footer"></tiles:insertAttribute>

@@ -1,4 +1,4 @@
-package com.example.rentcarspring.service.security;
+package com.example.rentcarspring.security;
 
 import com.example.rentcarspring.entity.Utente;
 import com.example.rentcarspring.service.UtenteService;

@@ -8,19 +8,29 @@
         <put-attribute name="content" value=""/>
         <put-attribute name="footer" value="/WEB-INF/layouts/template/footer.jsp"/>
     </definition>
+    <definition name="baseAdmin" template="/WEB-INF/layouts/template/baseAdmin.jsp">
+        <put-attribute name="titolo" value=""/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layouts/template/footer.jsp"/>
+    </definition>
+    <definition name="baseCustomer" template="/WEB-INF/layouts/template/baseCustomer.jsp">
+        <put-attribute name="titolo" value=""/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layouts/template/footer.jsp"/>
+    </definition>
     <definition name="welcome" extends="baseLayout">
         <put-attribute name="titolo" value="RentCar"/>
         <put-attribute name="content" value="/WEB-INF/views/welcome.jsp"/>
     </definition>
-    <definition name="admin" extends="baseLayout">
+    <definition name="admin" extends="baseAdmin">
         <put-attribute name="titolo" value="Admin Homepage"/>
         <put-attribute name="content" value="/WEB-INF/views/admin.jsp"/>
     </definition>
-    <definition name="utente-form" extends="baseLayout">
+    <definition name="utente-form" extends="baseAdmin">
         <put-attribute name="titolo" value="Form Utente"/>
         <put-attribute name="content" value="/WEB-INF/views/utente-form.jsp"/>
     </definition>
-    <definition name="edit-form" extends="baseLayout">
+    <definition name="edit-form" extends="baseAdmin">
         <put-attribute name="titolo" value="Form Utente"/>
         <put-attribute name="content" value="/WEB-INF/views/edit-form.jsp"/>
     </definition>
@@ -32,15 +42,15 @@
         <put-attribute name="titolo" value="Lista auto"/>
         <put-attribute name="content" value="/WEB-INF/views/list-prenotazioni-auto.jsp"/>
     </definition>
-    <definition name="user" extends="baseLayout">
+    <definition name="user" extends="baseCustomer">
         <put-attribute name="titolo" value="User Homepage"/>
         <put-attribute name="content" value="/WEB-INF/views/user.jsp"/>
     </definition>
-    <definition name="prenotazione-form" extends="baseLayout">
+    <definition name="prenotazione-form" extends="baseCustomer">
         <put-attribute name="titolo" value="Form Prenotazione"/>
         <put-attribute name="content" value="/WEB-INF/views/prenotazione-form.jsp"/>
     </definition>
-    <definition name="edit-prenotazione-form" extends="baseLayout">
+    <definition name="edit-prenotazione-form" extends="baseCustomer">
         <put-attribute name="titolo" value="Form Prenotazione"/>
         <put-attribute name="content" value="/WEB-INF/views/edit-prenotazione-form.jsp"/>
     </definition>

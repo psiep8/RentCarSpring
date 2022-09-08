@@ -7,7 +7,7 @@
 <div align="center">
     <h1 align="center">Lista prenotazioni:
     </h1>
-    <form method="POST" action="selectDate">
+    <form:form method="POST" action="selectDate">
         <div align="center">
             <tr>
                 Data di inizio da cercare:<input name="inizio" type="date"/>
@@ -15,7 +15,7 @@
                 <input type="submit" class="btn btn-primary"/>
             </tr>
         </div>
-    </form>
+    </form:form>
 
     <table border="1" cellpadding="5">
         <tr>

@@ -36,6 +36,6 @@
         </div>
         <input type="hidden" name="${_csrf.parameterName}"
                value="${_csrf.token}"/>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Accedi</button>
+        <button class="w-100 btn btn-lg btn-primary" name="login-submit" id="login-submit" type="submit">Accedi</button>
     </form>
 </main>

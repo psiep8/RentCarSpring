@@ -3,11 +3,14 @@ package com.example.rentcarspring.security;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Set;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
@@ -19,6 +22,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         return this.getAuthenticationManager().authenticate(authRequest);
     }
+
 
     private UsernamePasswordAuthenticationToken getAuthRequest(HttpServletRequest request) {
         String email = request.getParameter("email");
