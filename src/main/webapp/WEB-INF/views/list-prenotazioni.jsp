@@ -2,8 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <div align="center">
-    <h1 align="center"><b>Lista prenotazioni:</b></h1>
-    </br></br>
+    <h1 align="center"><b>Lista prenotazioni di ${utente.nome} ${utente.cognome}:</b></h1>
 
     <table border="1" cellpadding="5">
         <tr>
@@ -18,6 +17,7 @@
 
         <tr>
             <c:forEach var="pren" items="${prenotazioni}">
+
             <th><c:out value="${pren.id}"/></th>
             <th><c:out value="${pren.dataInizio}"/></th>
             <th><c:out value="${pren.dataFine}"/></th>

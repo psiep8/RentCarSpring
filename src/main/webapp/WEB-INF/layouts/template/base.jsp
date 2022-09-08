@@ -10,6 +10,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="tile" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!doctype html>
 <html lang="en">
@@ -196,8 +197,31 @@
             <span class="fs-4">RentCar</span>
         </a>
 
-        <li class="nav-item">
-            <a href="" class="nav-link active" aria-current="page">Home</a></li>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a href="/login/form" class="nav-link active" aria-current="page">Home</a></li>
+            <sec:authorize access="hasRole('USER') or hasRole('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="<spring:url value="/auto/" /> ">
+                        <span class="oi oi-box" title="box" aria-hidden="true"></span>
+                        Parco Auto </a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="hasRole('USER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="<spring:url value="/profiloUtente/" /> ">
+                        <span class="oi oi-box" title="box" aria-hidden="true"></span>
+                        Profilo Utente </a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="hasRole('USER') or hasRole('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="<spring:url value="/logout" /> ">
+                        <span class="oi oi-box" title="box" aria-hidden="true"></span>
+                        Logout </a>
+                </li>
+            </sec:authorize>
+        </ul>
     </header>
     <tiles:insertAttribute name="content"></tiles:insertAttribute>
     <tiles:insertAttribute name="footer"></tiles:insertAttribute>

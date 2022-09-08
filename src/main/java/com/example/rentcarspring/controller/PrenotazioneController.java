@@ -3,9 +3,15 @@ package com.example.rentcarspring.controller;
 import com.example.rentcarspring.dto.PrenotazioneDTO;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
+import com.example.rentcarspring.entity.Utente;
+import com.example.rentcarspring.mapper.PrenotazioneMapper;
+import com.example.rentcarspring.mapper.UtenteMapper;
 import com.example.rentcarspring.service.AutoService;
 import com.example.rentcarspring.service.FilterDateService;
 import com.example.rentcarspring.service.PrenotazioneService;
+import com.example.rentcarspring.service.UtenteService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +30,13 @@ public class PrenotazioneController {
     private final FilterDateService filterDateService;
     private final AutoService autoService;
 
-    public PrenotazioneController(PrenotazioneService prenotazioneService, FilterDateService filterDateService, AutoService autoService) {
+    private final UtenteService utenteService;
+
+    public PrenotazioneController(PrenotazioneService prenotazioneService, FilterDateService filterDateService, AutoService autoService, UtenteService utenteService) {
         this.prenotazioneService = prenotazioneService;
         this.filterDateService = filterDateService;
         this.autoService = autoService;
+        this.utenteService = utenteService;
     }
 
     @GetMapping("/listAuto")
@@ -39,7 +48,10 @@ public class PrenotazioneController {
 
     @GetMapping("/")
     public String listPrenotazioni(Model model) {
-        List<Prenotazione> prenotazioneList = prenotazioneService.getPrenotazioni();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Utente u = utenteService.getUserByEmail(email);
+        List<Prenotazione> prenotazioneList = u.getPrenotazioniFromUtenteItems();
         model.addAttribute("prenotazioni", prenotazioneList);
         return "user";
     }
@@ -72,18 +84,25 @@ public class PrenotazioneController {
 
     @PostMapping(value = "/selectDate")
     public String getDataRange(@RequestParam("inizio") String inizio, @RequestParam("fine") String fine, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Utente u = utenteService.getUserByEmail(email);
         model.addAttribute("inizio", inizio);
         model.addAttribute("fine", fine);
         List<Auto> list = filterDateService.getDataRange(LocalDate.parse(inizio), LocalDate.parse(fine));
         model.addAttribute("listFiltered", list);
+        model.addAttribute("utente", u);
         PrenotazioneDTO newPrenotazioneDTO = new PrenotazioneDTO();
         model.addAttribute("prenotazione", newPrenotazioneDTO);
         return "filtered-date";
     }
 
     @PostMapping("/savePrenotazione")
-    public String savePrenotazione(@ModelAttribute("prenotazione") PrenotazioneDTO prenotazioneDTO) {
-        prenotazioneService.updatePrenotazione(prenotazioneDTO);
+    public String savePrenotazione(@ModelAttribute("prenotazione") PrenotazioneDTO prenotazione) {
+        if (prenotazione.getId() != 0) {
+            prenotazioneService.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntity(prenotazione));
+        }
+        prenotazioneService.updatePrenotazione(prenotazione);
         return "redirect:/prenotazioni/";
     }
 }

@@ -22,7 +22,11 @@ public class PrenotazioneMapper {
 
         Utente utente = u.getUser(prenotazioneDTO.getIdUtente());
         Auto auto = a.getAuto(prenotazioneDTO.getIdAuto());
-        return new Prenotazione(LocalDate.parse(prenotazioneDTO.getDataInizio()), LocalDate.parse(prenotazioneDTO.getDataFine()), prenotazioneDTO.isApprovata(), utente, auto);
+        return new Prenotazione(LocalDate.parse(prenotazioneDTO.getDataInizio()),
+                LocalDate.parse(prenotazioneDTO.getDataFine()),
+                prenotazioneDTO.isApprovata(),
+                utente,
+                auto);
     }
 
 }

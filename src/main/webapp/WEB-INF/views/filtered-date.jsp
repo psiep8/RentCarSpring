@@ -23,6 +23,7 @@
             <form:form method="POST" modelAttribute="prenotazione" action="savePrenotazione">
                 <form:hidden value="${inizio}" path="dataInizio"/>
                 <form:hidden value="${fine}" path="dataFine"/>
+                <form:hidden path="idUtente" value="${utente.id}"/>
                 <form:hidden path="idAuto" value="${auto.id}"/>
                 <td colspan="2" align="center">
                     <input type="submit"></td>

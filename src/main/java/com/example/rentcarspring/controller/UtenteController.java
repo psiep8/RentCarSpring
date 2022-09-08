@@ -3,6 +3,7 @@ package com.example.rentcarspring.controller;
 import com.example.rentcarspring.dto.UtenteDTO;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.entity.Utente;
+import com.example.rentcarspring.mapper.UtenteMapper;
 import com.example.rentcarspring.service.FilterService;
 import com.example.rentcarspring.service.PrenotazioneService;
 import com.example.rentcarspring.service.UtenteService;
@@ -34,6 +35,7 @@ public class UtenteController {
         Utente utente = utenteService.getUser(id);
         List<Prenotazione> prenotazioneList = utente.getPrenotazioniFromUtenteItems();
         model.addAttribute("prenotazioni", prenotazioneList);
+        model.addAttribute("utente", utente);
         return "list-prenotazioni";
     }
 
@@ -73,7 +75,13 @@ public class UtenteController {
 
     @PostMapping("/saveUtente")
     public String saveUtente(@ModelAttribute("utente") UtenteDTO utenteDTO) {
-        utenteService.updateUtente(utenteDTO);
+        if (utenteDTO.getId() != 0) {
+            Utente u = UtenteMapper.fromDTOtoEntityMod(utenteDTO);
+            utenteService.updateUtente(u);
+        } else {
+            Utente u = UtenteMapper.fromDTOtoEntityAdd(utenteDTO);
+            utenteService.updateUtente(u);
+        }
         return "redirect:/utenti/";
     }
 

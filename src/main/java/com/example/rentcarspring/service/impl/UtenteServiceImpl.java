@@ -19,8 +19,8 @@ public class UtenteServiceImpl implements UtenteService {
     UtenteDAO utenteDAO;
 
     @Override
-    public void updateUtente(UtenteDTO utente) {
-        utenteDAO.updateUtente(UtenteMapper.fromDTOtoEntity(utente));
+    public void updateUtente(Utente utente) {
+        utenteDAO.updateUtente(utente);
     }
 
     @Override

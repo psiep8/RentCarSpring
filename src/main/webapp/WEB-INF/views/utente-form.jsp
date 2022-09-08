@@ -34,10 +34,15 @@
                 </td>
             </tr>
             <tr>
+                <th>Password:</th>
+                <td>
+                    <form:input id="password" path="password" type="text"/>
+                </td>
+            </tr>
+            <tr>
                 <th>Email:</th>
                 <td>
                     <form:input id="email" path="email" type="text"/>
-
                 </td>
             </tr>
             <tr>
@@ -52,7 +57,7 @@
                     <form:input id="dataNascita" path="dataNascita" type="date"/>
                 </td>
             </tr>
-
+            <form:hidden path="customer" value="true"/>
             <tr>
                 <td colspan="2" align="center">
                     <form:button cssClass="btn btn-primary">Aggiungi</form:button>

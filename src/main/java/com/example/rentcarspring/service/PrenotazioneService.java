@@ -6,7 +6,8 @@ import com.example.rentcarspring.entity.Prenotazione;
 import java.util.List;
 
 public interface PrenotazioneService {
-    void updatePrenotazione(PrenotazioneDTO prenotazioneDTO);
+
+    void updatePrenotazione(PrenotazioneDTO prenotazione);
 
     void updatePrenotazione(Prenotazione prenotazione);
 

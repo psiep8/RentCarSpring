@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <div align="center">
     <a href="showForm">Nuova Auto</a>
@@ -13,7 +15,9 @@
                 <th>Marca</th>
                 <th>Cilindrata</th>
                 <th>Modello</th>
-                <th>Operazioni</th>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <th>Operazioni</th>
+                </sec:authorize>
             </tr>
 
             <tr>
@@ -22,15 +26,18 @@
                 <th><c:out value="${temp.marca}"/></th>
                 <th><c:out value="${temp.cilindrata}"/></th>
                 <th><c:out value="${temp.modello}"/></th>
-                <th><c:url var="toUpdateAuto" value="updateForm">
-                    <c:param name="id" value="${temp.id}"/></c:url>
-                    <a href="${toUpdateAuto}">Modifica</a>
-                    <c:url var="toDeleteAuto" value="deleteAuto">
+                <sec:authorize access="hasRole('ADMIN')">
+                    <th><c:url var="toUpdateAuto" value="updateForm">
                         <c:param name="id" value="${temp.id}"/></c:url>
-                    <a href="${toDeleteAuto}">Elimina</a>
-                    <c:url var="toListPrenotazione" value="listPrenotazioni">
-                        <c:param name="id" value="${temp.id}"/></c:url>
-                    <a href="${toListPrenotazione}">Visualizza Prenotazioni</a></th>
+                        <a href="${toUpdateAuto}">Modifica</a>
+                        <c:url var="toDeleteAuto" value="deleteAuto">
+                            <c:param name="id" value="${temp.id}"/></c:url>
+                        <a href="${toDeleteAuto}">Elimina</a>
+                        <c:url var="toListPrenotazione" value="listPrenotazioni">
+                            <c:param name="id" value="${temp.id}"/></c:url>
+                        <a href="${toListPrenotazione}">Visualizza Prenotazioni</a></th>
+                </sec:authorize>
+
             </tr>
             </c:forEach>
         </table>
