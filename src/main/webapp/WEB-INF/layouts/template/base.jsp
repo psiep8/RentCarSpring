@@ -209,7 +209,7 @@
             </sec:authorize>
             <sec:authorize access="hasRole('USER')">
                 <li class="nav-item">
-                    <a class="nav-link" href="<spring:url value="/profiloUtente/" /> ">
+                    <a class="nav-link" href="<spring:url value="/prenotazioni/profiloUtente/" /> ">
                         <span class="oi oi-box" title="box" aria-hidden="true"></span>
                         Profilo Utente </a>
                 </li>

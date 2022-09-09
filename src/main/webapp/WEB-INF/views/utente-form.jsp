@@ -12,15 +12,27 @@
 
     <caption>
         <h2>
-
-
-            Inserimento nuovo utente
-
+            <c:choose>
+                <c:when test="${utente.id==0}">
+                    Inserimento nuovo utente
+                </c:when>
+                <c:otherwise>
+                    Modifica utente
+                </c:otherwise>
+            </c:choose>
         </h2>
     </caption>
     <table border="1" cellpadding="5">
 
         <form:form method="POST" modelAttribute="utente" action="saveUtente">
+            <c:if test="${utente.id!=0}">
+                <tr>
+                    <th>ID:</th>
+                    <td>
+                        <form:input id="id" path="id" value="${utente.id}" readonly="true"/>
+                    </td>
+                </tr>
+            </c:if>
             <tr>
                 <th>Nome:</th>
                 <td>
@@ -60,7 +72,7 @@
             <form:hidden path="customer" value="true"/>
             <tr>
                 <td colspan="2" align="center">
-                    <form:button cssClass="btn btn-primary">Aggiungi</form:button>
+                    <form:button cssClass="btn btn-primary">Procedi</form:button>
                 </td>
             </tr>
         </form:form>

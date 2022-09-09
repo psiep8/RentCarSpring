@@ -4,7 +4,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <body>
 <div align="center">
-    <a href="showForm">Nuovo utente</a>
+    <c:url var="toNewUtente" value="showForm">
+        <c:param name="id" value="0"/></c:url>
+    <a href="${toNewUtente}">Nuovo utente</a>
     <h1 align="center">Lista utenti:
     </h1>
     <div align="center">
@@ -43,7 +45,7 @@
                 <th><c:out value="${user.telefono}"/></th>
                 <th><c:out value="${user.dataNascita}"/></th>
                 <th>
-                    <c:url var="toUpdateUtente" value="updateForm">
+                    <c:url var="toUpdateUtente" value="showForm">
                         <c:param name="id" value="${user.id}"/></c:url>
                     <a href="${toUpdateUtente}">Modifica</a>
                     <c:url var="toDeleteUtente" value="deleteUtente">

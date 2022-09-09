@@ -16,13 +16,29 @@ import java.time.LocalDate;
 
 public class PrenotazioneMapper {
 
-    public static Prenotazione fromDTOtoEntity(PrenotazioneDTO prenotazioneDTO) {
+    public static Prenotazione fromDTOtoEntityMod(PrenotazioneDTO prenotazioneDTO) {
         UtenteDAO u = new UtenteDAOImpl();
         AutoDAO a = new AutoDAOImpl();
 
         Utente utente = u.getUser(prenotazioneDTO.getIdUtente());
         Auto auto = a.getAuto(prenotazioneDTO.getIdAuto());
-        return new Prenotazione(LocalDate.parse(prenotazioneDTO.getDataInizio()),
+        return new Prenotazione(
+                prenotazioneDTO.getId(),
+                LocalDate.parse(prenotazioneDTO.getDataInizio()),
+                LocalDate.parse(prenotazioneDTO.getDataFine()),
+                prenotazioneDTO.isApprovata(),
+                utente,
+                auto);
+    }
+
+    public static Prenotazione fromDTOtoEntityAdd(PrenotazioneDTO prenotazioneDTO) {
+        UtenteDAO u = new UtenteDAOImpl();
+        AutoDAO a = new AutoDAOImpl();
+
+        Utente utente = u.getUser(prenotazioneDTO.getIdUtente());
+        Auto auto = a.getAuto(prenotazioneDTO.getIdAuto());
+        return new Prenotazione(
+                LocalDate.parse(prenotazioneDTO.getDataInizio()),
                 LocalDate.parse(prenotazioneDTO.getDataFine()),
                 prenotazioneDTO.isApprovata(),
                 utente,

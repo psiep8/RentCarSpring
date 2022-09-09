@@ -6,7 +6,7 @@
         </br></br>
         <table border="1" cellpadding="5">
             <tr>
-                <th>ID</th>
+                <th>ID Utente</th>
                 <th>Data Inizio</th>
                 <th>Data Fine</th>
                 <th>Customer</th>
@@ -21,7 +21,7 @@
                 <th><c:out value="${pren.utente.nome}"/>
                     <c:out value="${pren.utente.cognome}"/></th>
                 <th><c:out value="${pren.auto.marca}"/>
-                    <c:out value="${pren.auto.modello}"/></th>
+                    <c:out value="${pren.auto.modello}"/></th
             </tr>
             </c:forEach>
     </form>

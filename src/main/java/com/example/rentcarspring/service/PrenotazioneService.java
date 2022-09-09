@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PrenotazioneService {
 
-    void updatePrenotazione(PrenotazioneDTO prenotazione);
+   // void updatePrenotazione(PrenotazioneDTO prenotazione);
 
     void updatePrenotazione(Prenotazione prenotazione);
 

@@ -4,7 +4,11 @@
 
 
 <div align="center">
-    <a href="showForm">Nuova Auto</a>
+    <sec:authorize access="hasRole('ADMIN')">
+        <c:url var="toNewAuto" value="showForm">
+            <c:param name="id" value="0"/></c:url>
+        <a href="${toNewAuto}">Nuova Auto</a>
+    </sec:authorize>
     <h1 align="center">Lista Auto:
     </h1>
     <div align="center">
@@ -27,7 +31,7 @@
                 <th><c:out value="${temp.cilindrata}"/></th>
                 <th><c:out value="${temp.modello}"/></th>
                 <sec:authorize access="hasRole('ADMIN')">
-                    <th><c:url var="toUpdateAuto" value="updateForm">
+                    <th><c:url var="toUpdateAuto" value="showForm">
                         <c:param name="id" value="${temp.id}"/></c:url>
                         <a href="${toUpdateAuto}">Modifica</a>
                         <c:url var="toDeleteAuto" value="deleteAuto">

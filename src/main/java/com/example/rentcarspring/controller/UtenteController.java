@@ -54,19 +54,25 @@ public class UtenteController {
     }
 
     @GetMapping("/showForm")
-    public String showForm(Model model) {
-        Utente utente = new Utente();
-        model.addAttribute("utente", utente);
+    public String showForm(@RequestParam int id, Model model) {
+        if (id == 0) {
+            Utente utente = new Utente();
+            model.addAttribute("utente", utente);
+        } else {
+            Utente utente = utenteService.getUser(id);
+            model.addAttribute("utente", utente);
+        }
         return "utente-form";
     }
 
-    @GetMapping("/updateForm")
-    public String updateForm(@RequestParam int id, Model model) {
-        Utente utente = utenteService.getUser(id);
-        model.addAttribute("utente", utente);
-        return "edit-form";
-    }
-
+    /*
+        @GetMapping("/updateForm")
+        public String updateForm(@RequestParam int id, Model model) {
+            Utente utente = utenteService.getUser(id);
+            model.addAttribute("utente", utente);
+            return "edit-form";
+        }
+    */
     @GetMapping(value = "/deleteUtente")
     public String deleteUtente(@RequestParam int id) {
         utenteService.deleteUtente(id);

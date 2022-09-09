@@ -2,6 +2,7 @@ package com.example.rentcarspring.controller;
 
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
+import com.example.rentcarspring.entity.Utente;
 import com.example.rentcarspring.service.AutoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,20 +37,26 @@ public class AutoController {
     }
 
     @GetMapping("/showForm")
-    public String showForm(Model model) {
-        Auto auto = new Auto();
-        model.addAttribute("auto", auto);
+    public String showForm(@RequestParam int id, Model model) {
+        if (id == 0) {
+            Auto auto = new Auto();
+            model.addAttribute("auto", auto);
+        } else {
+            Auto auto = autoService.getAuto(id);
+            model.addAttribute("auto", auto);
+        }
         return "auto-form";
     }
 
-    @GetMapping("/updateForm")
-    public String updateForm(@RequestParam int id, Model model) {
-        Auto auto = autoService.getAuto(id);
-        model.addAttribute("auto", auto);
-        return "edit-auto";
-    }
-
-    @PostMapping("/deleteAuto")
+    /*
+        @GetMapping("/updateForm")
+        public String updateForm(@RequestParam int id, Model model) {
+            Auto auto = autoService.getAuto(id);
+            model.addAttribute("auto", auto);
+            return "edit-auto";
+        }
+    */
+    @GetMapping("/deleteAuto")
     public String deleteAuto(@RequestParam int id) {
         autoService.deleteAuto(id);
         return "redirect:/auto/";
@@ -60,5 +67,4 @@ public class AutoController {
         autoService.updateAuto(auto);
         return "redirect:/auto/";
     }
-
 }

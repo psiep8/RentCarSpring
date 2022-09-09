@@ -2,13 +2,10 @@ package com.example.rentcarspring.dto;
 
 public class PrenotazioneDTO {
     private int id;
-
     private int idUtente;
     private int idAuto;
     private String dataInizio;
-
     private String dataFine;
-
     private boolean approvata;
 
     public int getId() {

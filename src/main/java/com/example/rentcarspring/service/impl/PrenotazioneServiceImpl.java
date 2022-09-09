@@ -15,10 +15,10 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
     @Autowired
     PrenotazioneDAO prenotazioneDAO;
 
-    @Override
+    /*@Override
     public void updatePrenotazione(PrenotazioneDTO prenotazione) {
-        prenotazioneDAO.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntity(prenotazione));
-    }
+        prenotazioneDAO.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntityMod(prenotazione));
+    }*/
 
     @Override
     public void updatePrenotazione(Prenotazione prenotazione) {

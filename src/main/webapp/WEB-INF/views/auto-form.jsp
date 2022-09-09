@@ -5,14 +5,27 @@
 
     <caption>
         <h2>
-
-            Inserimento nuova auto
-
+            <c:choose>
+                <c:when test="${auto.id==0}">
+                    Inserimento nuova auto
+                </c:when>
+                <c:otherwise>
+                    Modifica auto
+                </c:otherwise>
+            </c:choose>
         </h2>
     </caption>
     <table border="1" cellpadding="5">
 
         <form:form method="POST" modelAttribute="auto" action="saveAuto">
+            <c:if test="${auto.id!=0}">
+                <tr>
+                    <th>ID:</th>
+                    <td>
+                        <form:input id="id" path="id" value="${auto.id}" readonly="true"/>
+                    </td>
+                </tr>
+            </c:if>
             <tr>
                 <th>Marca:</th>
                 <td>
@@ -33,10 +46,9 @@
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <form:button cssClass="btn btn-primary">Modifica</form:button>
+                    <form:button cssClass="btn btn-primary">Procedi</form:button>
                 </td>
             </tr>
         </form:form>
-
     </table>
 </div>
