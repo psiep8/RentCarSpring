@@ -65,14 +65,6 @@ public class UtenteController {
         return "utente-form";
     }
 
-    /*
-        @GetMapping("/updateForm")
-        public String updateForm(@RequestParam int id, Model model) {
-            Utente utente = utenteService.getUser(id);
-            model.addAttribute("utente", utente);
-            return "edit-form";
-        }
-    */
     @GetMapping(value = "/deleteUtente")
     public String deleteUtente(@RequestParam int id) {
         utenteService.deleteUtente(id);

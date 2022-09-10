@@ -29,7 +29,6 @@ public class PrenotazioneController {
     private final PrenotazioneService prenotazioneService;
     private final FilterDateService filterDateService;
     private final AutoService autoService;
-
     private final UtenteService utenteService;
 
     public PrenotazioneController(PrenotazioneService prenotazioneService, FilterDateService filterDateService, AutoService autoService, UtenteService utenteService) {
@@ -56,14 +55,6 @@ public class PrenotazioneController {
         return "user";
     }
 
-
-    @GetMapping("/showForm")
-    public String showForm(Model model) {
-        Prenotazione prenotazione = new Prenotazione();
-        model.addAttribute("prenotazione", prenotazione);
-        return "prenotazione-form";
-    }
-
     @GetMapping("/updateForm")
     public String updateForm(@RequestParam int id, Model model) {
         Prenotazione prenotazione = prenotazioneService.getPrenotazione(id);
@@ -83,12 +74,13 @@ public class PrenotazioneController {
     }
 
     @PostMapping(value = "/selectDate")
-    public String getDataRange(@RequestParam("inizio") String inizio, @RequestParam("fine") String fine, Model model) {
+    public String getDataRange(@RequestParam("id") int id, @RequestParam("inizio") String inizio, @RequestParam("fine") String fine, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
         Utente u = utenteService.getUserByEmail(email);
         model.addAttribute("inizio", inizio);
         model.addAttribute("fine", fine);
+        model.addAttribute("id", id);
         List<Auto> list = filterDateService.getDataRange(LocalDate.parse(inizio), LocalDate.parse(fine));
         model.addAttribute("listFiltered", list);
         model.addAttribute("utente", u);
@@ -98,11 +90,19 @@ public class PrenotazioneController {
     }
 
     @PostMapping("/savePrenotazione")
-    public String savePrenotazione(@ModelAttribute("prenotazione") PrenotazioneDTO prenotazione) {
+    public String savePrenotazione(@RequestParam("dataInizio") String inizio, @RequestParam("dataFine") String fine, Model model, @ModelAttribute("prenotazione") PrenotazioneDTO prenotazione) {
         if (prenotazione.getId() != 0) {
-            prenotazioneService.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntity(prenotazione));
-        }
-        prenotazioneService.updatePrenotazione(prenotazione);
+            prenotazioneService.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntityMod(prenotazione));
+        } else prenotazioneService.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntityAdd(prenotazione));
         return "redirect:/prenotazioni/";
+    }
+
+    @GetMapping("/profiloUtente")
+    public String profiloUtente(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        Utente u = utenteService.getUserByEmail(email);
+        model.addAttribute("utente", u);
+        return "profilo-utente";
     }
 }

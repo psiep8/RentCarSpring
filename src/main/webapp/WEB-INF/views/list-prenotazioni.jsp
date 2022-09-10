@@ -8,20 +8,15 @@
             <th>ID</th>
             <th>Data Inizio</th>
             <th>Data Fine</th>
-            <th>Customer</th>
             <th>Veicolo</th>
-            <c:forEach var="pren" items="${prenotazioni}">
 
-            <c:if test="${pren.approvata==false}">
-                <th>Approvazione</th>
-            </c:if>
         </tr>
         <tr>
+            <c:forEach var="pren" items="${prenotazioni}">
+
             <th><c:out value="${pren.id}"/></th>
             <th><c:out value="${pren.dataInizio}"/></th>
             <th><c:out value="${pren.dataFine}"/></th>
-            <th><c:out value="${pren.utente.nome}"/>
-                <c:out value="${pren.utente.cognome}"/></th>
             <th><c:out value="${pren.auto.marca}"/>
                 <c:out value="${pren.auto.modello}"/></th>
             <th>
@@ -32,7 +27,7 @@
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
-                        <input type="submit" value="vai">
+                        <input type="submit" value="Approva">
                     </form:form>
                 </c:if>
             </th>

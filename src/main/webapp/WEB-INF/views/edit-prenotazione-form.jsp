@@ -16,29 +16,28 @@ To change this template use File | Settings | File Templates.
     </caption>
     <table border="1" cellpadding="5">
 
-        <form:form method="POST" modelAttribute="prenotazione" action="savePrenotazione">
-
+        <form:form method="POST" action="selectDate">
             <tr>
                 <th>ID:</th>
                 <td>
-                    <form:input id="id" path="id" value="${prenotazione.id}" readonly="true"/>
+                    <input name="id" value="${prenotazione.id}" readonly="true"/>
                 </td>
             </tr>
             <tr>
                 <th>Data Inizio:</th>
                 <td>
-                    <form:input id="dataInizio" path="dataInizio" value="${prenotazione.dataInizio}"/>
+                    <input name="inizio" value="${prenotazione.dataInizio}"/>
                 </td>
             </tr>
             <tr>
                 <th>Data Fine:</th>
                 <td>
-                    <form:input id="dataFine" path="dataFine" value="${prenotazione.dataFine}"/>
+                    <input name="fine" value="${prenotazione.dataFine}"/>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <form:button cssClass="btn btn-primary">Modifica</form:button>
+                    <button class="btn btn-primary">Modifica</button>
                 </td>
             </tr>
         </form:form>

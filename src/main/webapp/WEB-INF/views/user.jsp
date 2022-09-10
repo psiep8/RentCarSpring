@@ -12,6 +12,7 @@
             <tr>
                 Data di inizio da cercare:<input name="inizio" type="date"/>
                 Data di fine da cercare:<input name="fine" type="date"/>
+                <input name="id" value="0" type="hidden"/>
                 <input type="submit" class="btn btn-primary"/>
             </tr>
         </div>
@@ -21,12 +22,16 @@
         <tr>
             <th>Data Inizio</th>
             <th>Data Fine</th>
+            <th>Veicolo</th>
             <th>Operazioni</th>
         </tr>
         <tr>
             <c:forEach var="pren" items="${prenotazioni}">
             <th><c:out value="${pren.dataInizio}"/></th>
             <th><c:out value="${pren.dataFine}"/></th>
+            <th><c:out value="${pren.auto.marca}"/>
+                <c:out value="${pren.auto.modello}"/></th>
+
             <th>
                 <c:url var="toUpdatePrenotazione" value="updateForm">
                     <c:param name="id" value="${pren.id}"/></c:url>

@@ -20,11 +20,11 @@ public class Prenotazione {
     @Column(name = "approvata")
     private boolean approvata;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "auto_id")
     private Auto auto;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "utente_id")
     private Utente utente;
 

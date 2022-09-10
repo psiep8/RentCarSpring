@@ -33,7 +33,7 @@ public class Utente {
     @Column(name = "customer")
     private boolean customer;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utente", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "utente")
     private List<Prenotazione> prenotazioniFromUtenteItems;
 
     public Utente() {

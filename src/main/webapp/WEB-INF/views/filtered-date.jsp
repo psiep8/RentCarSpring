@@ -21,6 +21,7 @@
             <th><c:out value="${auto.cilindrata}"/></th>
             <th><c:out value="${auto.modello}"/></th>
             <form:form method="POST" modelAttribute="prenotazione" action="savePrenotazione">
+                <form:hidden value="${id}" path="id"/>
                 <form:hidden value="${inizio}" path="dataInizio"/>
                 <form:hidden value="${fine}" path="dataFine"/>
                 <form:hidden path="idUtente" value="${utente.id}"/>

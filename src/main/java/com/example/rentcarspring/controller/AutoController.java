@@ -26,6 +26,7 @@ public class AutoController {
         Auto auto = autoService.getAuto(id);
         List<Prenotazione> prenotazioneList = auto.getPrenotazioniFromAutoItems();
         model.addAttribute("prenotazioni", prenotazioneList);
+        model.addAttribute("auto", auto);
         return "list-prenotazioni-auto";
     }
 
@@ -48,14 +49,6 @@ public class AutoController {
         return "auto-form";
     }
 
-    /*
-        @GetMapping("/updateForm")
-        public String updateForm(@RequestParam int id, Model model) {
-            Auto auto = autoService.getAuto(id);
-            model.addAttribute("auto", auto);
-            return "edit-auto";
-        }
-    */
     @GetMapping("/deleteAuto")
     public String deleteAuto(@RequestParam int id) {
         autoService.deleteAuto(id);

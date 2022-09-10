@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Repository
@@ -34,10 +35,8 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
             if (prenotazione != null) {
                 session.delete(prenotazione);
             }
-
-            session.delete(prenotazione);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (EntityNotFoundException e) {
             if (transaction != null) {
                 transaction.rollback();
             }

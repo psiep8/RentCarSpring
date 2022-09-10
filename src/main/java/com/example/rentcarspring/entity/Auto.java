@@ -21,7 +21,7 @@ public class Auto {
     @Column(name = "modello")
     private String modello;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "auto", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "auto")
     private List<Prenotazione> prenotazioniFromAutoItems;
 
     public Auto() {
