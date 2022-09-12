@@ -15,4 +15,6 @@ public interface UtenteService {
 
     Utente getUserByEmail(String email);
 
+    void approvaPrenotazione(String string, int id);
+
 }

@@ -1,24 +1,19 @@
 package com.example.rentcarspring.service.impl;
 
 import com.example.rentcarspring.dao.PrenotazioneDAO;
-import com.example.rentcarspring.dto.PrenotazioneDTO;
 import com.example.rentcarspring.entity.Prenotazione;
-import com.example.rentcarspring.mapper.PrenotazioneMapper;
 import com.example.rentcarspring.service.PrenotazioneService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class PrenotazioneServiceImpl implements PrenotazioneService {
-    @Autowired
-    PrenotazioneDAO prenotazioneDAO;
+    private final PrenotazioneDAO prenotazioneDAO;
 
-    /*@Override
-    public void updatePrenotazione(PrenotazioneDTO prenotazione) {
-        prenotazioneDAO.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntityMod(prenotazione));
-    }*/
+    public PrenotazioneServiceImpl(PrenotazioneDAO prenotazioneDAO) {
+        this.prenotazioneDAO = prenotazioneDAO;
+    }
 
     @Override
     public void updatePrenotazione(Prenotazione prenotazione) {

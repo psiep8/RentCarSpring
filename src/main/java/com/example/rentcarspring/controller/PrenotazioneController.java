@@ -5,7 +5,6 @@ import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.entity.Utente;
 import com.example.rentcarspring.mapper.PrenotazioneMapper;
-import com.example.rentcarspring.mapper.UtenteMapper;
 import com.example.rentcarspring.service.AutoService;
 import com.example.rentcarspring.service.FilterDateService;
 import com.example.rentcarspring.service.PrenotazioneService;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -40,16 +38,14 @@ public class PrenotazioneController {
 
     @GetMapping("/listAuto")
     public String listAuto(Model model) {
-        List<Auto> autoList = autoService.getAuto();
+        List<Auto> autoList = autoService.getAutoList();
         model.addAttribute("auto", autoList);
         return "list-auto-prenotabili";
     }
 
     @GetMapping("/")
     public String listPrenotazioni(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        Utente u = utenteService.getUserByEmail(email);
+        Utente u = getUtenteBySession();
         List<Prenotazione> prenotazioneList = u.getPrenotazioniFromUtenteItems();
         model.addAttribute("prenotazioni", prenotazioneList);
         return "user";
@@ -63,21 +59,20 @@ public class PrenotazioneController {
     }
 
     @GetMapping("/deletePrenotazione")
-    public String deletePrenotazione(@RequestParam int id) throws IOException {
+    public String deletePrenotazione(@RequestParam int id) throws Exception {
         LocalDate dataInizio = prenotazioneService.getPrenotazione(id).getDataInizio();
         if (dataInizio.until(LocalDate.now(), ChronoUnit.DAYS) > 2) {
             prenotazioneService.deletePrenotazione(id);
         } else {
-            throw new IOException("Errore, non è possibile cancellare entro due giorni dalla prenotazione");
+            throw new Exception("Errore, non è possibile cancellare entro due giorni dalla prenotazione");
         }
         return "redirect:/prenotazioni/";
     }
 
+
     @PostMapping(value = "/selectDate")
     public String getDataRange(@RequestParam("id") int id, @RequestParam("inizio") String inizio, @RequestParam("fine") String fine, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        Utente u = utenteService.getUserByEmail(email);
+        Utente u = getUtenteBySession();
         model.addAttribute("inizio", inizio);
         model.addAttribute("fine", fine);
         model.addAttribute("id", id);
@@ -90,19 +85,21 @@ public class PrenotazioneController {
     }
 
     @PostMapping("/savePrenotazione")
-    public String savePrenotazione(@RequestParam("dataInizio") String inizio, @RequestParam("dataFine") String fine, Model model, @ModelAttribute("prenotazione") PrenotazioneDTO prenotazione) {
-        if (prenotazione.getId() != 0) {
-            prenotazioneService.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntityMod(prenotazione));
-        } else prenotazioneService.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntityAdd(prenotazione));
+    public String savePrenotazione(@ModelAttribute("prenotazione") PrenotazioneDTO prenotazione) {
+        prenotazioneService.updatePrenotazione(PrenotazioneMapper.fromDTOtoEntity(prenotazione));
         return "redirect:/prenotazioni/";
     }
 
     @GetMapping("/profiloUtente")
     public String profiloUtente(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = authentication.getName();
-        Utente u = utenteService.getUserByEmail(email);
+        Utente u = getUtenteBySession();
         model.addAttribute("utente", u);
         return "profilo-utente";
+    }
+
+    private Utente getUtenteBySession() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return utenteService.getUserByEmail(email);
     }
 }

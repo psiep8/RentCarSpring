@@ -9,7 +9,7 @@ public interface AutoService {
 
     void deleteAuto(int id);
 
-    List<Auto> getAuto();
+    List<Auto> getAutoList();
 
     Auto getAuto(int id);
 }

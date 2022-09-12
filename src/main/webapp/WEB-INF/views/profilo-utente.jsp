@@ -46,7 +46,7 @@
                 <tr>
                     <th>Data di nascita:</th>
                     <td>
-                        <form:input id="dataNascita" path="dataNascita" type="date"/>
+                        <form:input id="data_nascita" path="data_nascita" type="date"/>
                     </td>
                     <td colspan="2" align="center">
                         <form:button cssClass="btn btn-primary">Modifica</form:button>

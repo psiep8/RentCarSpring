@@ -3,15 +3,18 @@ package com.example.rentcarspring.service.impl;
 import com.example.rentcarspring.dao.AutoDAO;
 import com.example.rentcarspring.entity.Auto;
 import com.example.rentcarspring.service.AutoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class AutoServiceImpl implements AutoService {
-    @Autowired
-    AutoDAO autoDAO;
+
+    private final AutoDAO autoDAO;
+
+    public AutoServiceImpl(AutoDAO autoDAO) {
+        this.autoDAO = autoDAO;
+    }
 
     @Override
     public void updateAuto(Auto auto) {
@@ -24,7 +27,7 @@ public class AutoServiceImpl implements AutoService {
     }
 
     @Override
-    public List<Auto> getAuto() {
+    public List<Auto> getAutoList() {
         return autoDAO.getAllAuto();
     }
 

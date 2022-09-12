@@ -19,13 +19,11 @@ public class UtenteController {
 
 
     private final UtenteService utenteService;
-    private final PrenotazioneService prenotazioneService;
     private final FilterService filterService;
 
 
-    public UtenteController(UtenteService utenteService, PrenotazioneService prenotazioneService, FilterService filterService) {
+    public UtenteController(UtenteService utenteService, FilterService filterService) {
         this.utenteService = utenteService;
-        this.prenotazioneService = prenotazioneService;
         this.filterService = filterService;
     }
 
@@ -55,13 +53,8 @@ public class UtenteController {
 
     @GetMapping("/showForm")
     public String showForm(@RequestParam int id, Model model) {
-        if (id == 0) {
-            Utente utente = new Utente();
-            model.addAttribute("utente", utente);
-        } else {
-            Utente utente = utenteService.getUser(id);
-            model.addAttribute("utente", utente);
-        }
+        Utente utente = id == 0 ? new Utente() : utenteService.getUser(id);
+        model.addAttribute("utente", utente);
         return "utente-form";
     }
 
@@ -73,21 +66,13 @@ public class UtenteController {
 
     @PostMapping("/saveUtente")
     public String saveUtente(@ModelAttribute("utente") UtenteDTO utenteDTO) {
-        if (utenteDTO.getId() != 0) {
-            Utente u = UtenteMapper.fromDTOtoEntityMod(utenteDTO);
-            utenteService.updateUtente(u);
-        } else {
-            Utente u = UtenteMapper.fromDTOtoEntityAdd(utenteDTO);
-            utenteService.updateUtente(u);
-        }
+        utenteService.updateUtente(UtenteMapper.fromDTOtoEntity(utenteDTO));
         return "redirect:/utenti/";
     }
 
     @PostMapping("/approvata")
     public String approvata(@RequestParam("approved") String approvata, @RequestParam int id) {
-        Prenotazione prenotazione = prenotazioneService.getPrenotazione(id);
-        prenotazione.setApprovata(approvata.equals("Si"));
-        prenotazioneService.updatePrenotazione(prenotazione);
+        utenteService.approvaPrenotazione(approvata, id);
         return "redirect:/utenti/";
     }
 

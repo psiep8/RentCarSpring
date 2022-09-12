@@ -1,13 +1,10 @@
 package com.example.rentcarspring.service.impl;
 
+import com.example.rentcarspring.dao.PrenotazioneDAO;
 import com.example.rentcarspring.dao.UtenteDAO;
-import com.example.rentcarspring.dto.UtenteDTO;
+import com.example.rentcarspring.entity.Prenotazione;
 import com.example.rentcarspring.entity.Utente;
-import com.example.rentcarspring.mapper.UtenteMapper;
 import com.example.rentcarspring.service.UtenteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +12,13 @@ import java.util.List;
 @Service
 public class UtenteServiceImpl implements UtenteService {
 
-    @Autowired
-    UtenteDAO utenteDAO;
+    private final UtenteDAO utenteDAO;
+    private final PrenotazioneDAO prenotazioneDAO;
+
+    public UtenteServiceImpl(UtenteDAO utenteDAO, PrenotazioneDAO prenotazioneDAO) {
+        this.utenteDAO = utenteDAO;
+        this.prenotazioneDAO = prenotazioneDAO;
+    }
 
     @Override
     public void updateUtente(Utente utente) {
@@ -41,6 +43,13 @@ public class UtenteServiceImpl implements UtenteService {
     @Override
     public Utente getUserByEmail(String email) {
         return utenteDAO.getUserByEmail(email);
+    }
+
+    @Override
+    public void approvaPrenotazione(String string, int id) {
+        Prenotazione prenotazione = prenotazioneDAO.getPrenotazione(id);
+        prenotazione.setApprovata(string.equals("Si"));
+        prenotazioneDAO.updatePrenotazione(prenotazione);
     }
 
 
